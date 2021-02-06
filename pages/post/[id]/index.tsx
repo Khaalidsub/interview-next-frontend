@@ -7,7 +7,8 @@ import CommentCard from '../../../components/CommentCard'
 import React, { useEffect } from 'react'
 import SearchField from '../../../components/SearchField'
 import { useState } from 'react'
-
+import { AnimatePresence, motion } from "framer-motion";
+import { containerVariants } from "../../../themes/motion";
 export interface PostProps {
     post: post
     comments: Comment[]
@@ -21,7 +22,15 @@ export const Post = ({ post, comments }: PostProps) => {
         return (
             <>
                 {filteredComments.map((comment) => {
-                    return <CommentCard key={comment.id} comment={comment} />
+                    return (
+                        <AnimatePresence
+
+                            key={comment.id}>
+
+                            <CommentCard key={comment.id} comment={comment} />
+                        </AnimatePresence>
+                    )
+
                 })}
             </>
         )
@@ -46,14 +55,19 @@ export const Post = ({ post, comments }: PostProps) => {
                 <SearchField searchValue={search} onSearchHandler={setSearch} onTypeSearchHandler={setType} typeValue={type} />
             </div>
 
-            <div className="max-w-3xl mx-4 md:mx-auto p-12 pt-9 border rounded-md mt-3">
+            <motion.div
+                variants={containerVariants}
+                initial="hidden"
+                animate="visible"
+                exit="exit"
+                className="max-w-3xl mx-4 md:mx-auto p-12 pt-9 border rounded-md mt-3">
                 <div className="">
                     <h3 className="text-2xl font-semibold">Comments</h3>
 
                 </div>
 
                 <RenderComments />
-            </div>
+            </motion.div>
         </>
 
     )
