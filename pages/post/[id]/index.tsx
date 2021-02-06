@@ -1,38 +1,57 @@
 import { useRouter } from 'next/router'
 import { axios } from '../../../util'
-import { Post as post, Comment } from '../../../types'
+import { Post as post, Comment, CommentSearch } from '../../../types'
 import Link from 'next/Link'
 import Navigation from "../../../components/Navigation"
 import CommentCard from '../../../components/CommentCard'
+import React, { useEffect } from 'react'
+import SearchField from '../../../components/SearchField'
+import { useState } from 'react'
 
 export interface PostProps {
     post: post
     comments: Comment[]
 }
 export const Post = ({ post, comments }: PostProps) => {
+    const [search, setSearch] = useState('')
+    const [filteredComments, setFilteredComments] = useState(comments)
+    const [type, setType] = useState(CommentSearch.name)
 
     const RenderComments = () => {
         return (
             <>
-                {comments.map((comment) => {
+                {filteredComments.map((comment) => {
                     return <CommentCard comment={comment} />
                 })}
             </>
         )
     }
+    const filterComments = () =>
+        comments.filter((comment) => comment[type].toLowerCase().includes(search.toLowerCase()) ?? comment)
+
+
+
+
+    useEffect(() => {
+        setFilteredComments(filterComments)
+    }, [search || type])
     return (
-        <
-            >
-
-
-
-
+        <>
             <Navigation>
                 <h4 className="text-center text-xl font-bold capitalize    p-3" >{post.title}</h4>
             </Navigation>
-            <div className="max-w-xl mx-auto "> <div className="bg-black text-white inline-block p-2 text-sm px-5 rounded-md m-2"><Link href="/"> Back </Link></div></div>
-            <div className="max-w-xl mx-auto p-12 pt-9 border rounded-md">
-                <h3 className="text-2xl font-semibold">Comments</h3>
+            <div className="max-w-3xl mx-4 md:mx-auto flex flex-col justify-center md:flex-row ">
+
+                <div className="bg-black text-white mx-auto  md:mx-0 md:mr-3 inline-block p-2 text-sm px-5 rounded-md w-2/4 mb-4 shadow md:w-16 md:my-auto  text-center m-2"><Link href="/"> Back </Link></div>
+                <SearchField searchValue={search} onSearchHandler={setSearch} onTypeSearchHandler={setType} typeValue={type} />
+            </div>
+
+            <div className="max-w-3xl mx-4 md:mx-auto p-12 pt-9 border rounded-md mt-3">
+                <div className="">
+                    <h3 className="text-2xl font-semibold">Comments</h3>
+
+                </div>
+
                 <RenderComments />
             </div>
         </>

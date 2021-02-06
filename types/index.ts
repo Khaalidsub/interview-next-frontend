@@ -13,3 +13,9 @@ export interface Comment {
   email: string;
   body: string;
 }
+
+export enum CommentSearch {
+  name = "name",
+  email = "email",
+  body = "body",
+}
