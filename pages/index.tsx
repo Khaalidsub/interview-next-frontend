@@ -31,12 +31,12 @@ export const Posts = ({ posts }: PostsProps) => {
     <>
 
       <Navigation />
-      <Container mt="22" maxW="6xl"  >
 
-        <SimpleGrid minChildWidth="340px" spacing="40px">
-          <RenderPosts />
-        </SimpleGrid>
-      </Container>
+
+      <div className="flex flex-wrap justify-center" >
+        <RenderPosts />
+
+      </div>
     </>
   )
 }

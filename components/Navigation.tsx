@@ -1,21 +1,15 @@
-import {
-    Box, Container, Breadcrumb,
-    BreadcrumbItem,
-    BreadcrumbLink,
-    BreadcrumbSeparator
-} from "@chakra-ui/react";
+
 
 export default function Navigation() {
     return (
-        <Container mt="20" maxW="6xl">
-            <Box padding="4" maxW="md" borderWidth="1px" borderRadius="lg" overflow="hidden" >
-                <Breadcrumb>
-                    <BreadcrumbItem>
-                        <BreadcrumbLink href="#">Posts</BreadcrumbLink>
-                    </BreadcrumbItem>
+        <div className="my-12 flex justify-center">
+            <div className="object-center border border-black shadow-lg max-w-md flex-grow py-4 rounded-md"  >
 
-                </Breadcrumb>
-            </Box>
-        </Container>
+                <h4 className="text-center text-2xl font-bold" >Posts</h4>
+
+
+
+            </div>
+        </div>
     )
 }

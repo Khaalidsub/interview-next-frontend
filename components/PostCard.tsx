@@ -1,4 +1,4 @@
-import { Box } from "@chakra-ui/react";
+
 import Link from 'next/Link'
 import { Post } from "../types";
 // import Link from 'next/link'
@@ -7,23 +7,22 @@ interface PostCardProps {
 }
 export default function PostCard({ post }: PostCardProps) {
     return (
-        <Box
-
-            padding="4" maxW="md" borderWidth="1px" borderRadius="lg" overflow="hidden">
+        <div
+            className="hover:border-green-900 shadow-md border border-black rounded max-w-sm m-4 p-4"
+        >
             <Link href={{ pathname: `/post/${post.id}`, }}>
-                <Box
-
-                    lineHeight="tight"
-                    isTruncated textAlign="center" fontWeight="semibold" letterSpacing="wide" textTransform="uppercase" color="black">
+                <h4
+                    className="truncate capitalize font-semibold text-center cursor-pointer hover:underline"
+                >
                     {post.title}
-                </Box>
+                </h4>
             </Link>
-            <Box
-                mt="2"
+            <p
+                className="whitespace-normal text-base mt-2 overflow-ellipsis"
             >
                 {post.body}
-            </Box>
+            </p>
 
-        </Box>
+        </div>
     )
 }

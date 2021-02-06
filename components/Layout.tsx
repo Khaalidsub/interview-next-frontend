@@ -1,18 +1,17 @@
-import { ChakraProvider } from "@chakra-ui/react"
-import React from "react"
+
 
 export const Layout = ({ children }) => {
     return (
-        <>
-
-            <ChakraProvider>
+        <div className="">
 
 
 
 
 
-                {children}
-            </ChakraProvider>
-        </>
+
+
+            {children}
+
+        </div>
     )
 }
