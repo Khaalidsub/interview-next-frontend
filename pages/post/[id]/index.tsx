@@ -21,7 +21,7 @@ export const Post = ({ post, comments }: PostProps) => {
         return (
             <>
                 {filteredComments.map((comment) => {
-                    return <CommentCard comment={comment} />
+                    return <CommentCard key={comment.id} comment={comment} />
                 })}
             </>
         )
