@@ -28,7 +28,7 @@ export const Posts = ({ posts }: PostsProps) => {
     <>
 
       <Navigation >
-        <h4 className="text-center text-2xl font-bold" >Posts</h4>
+        <h4 className="text-center text-2xl antialiased font-semibold" >Posts</h4>
       </Navigation>
 
       <div className="flex flex-wrap justify-center" >

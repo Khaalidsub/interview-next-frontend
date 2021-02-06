@@ -17,7 +17,7 @@ export default function PostCard({ post }: PostCardProps) {
             </Link>
             <Link href={{ pathname: `/post/${post.id}`, }}>
                 <h4
-                    className="mt-6 truncate capitalize font-semibold text-center cursor-pointer hover:underline"
+                    className="mt-6 truncate capitalize font-sans font-semibold text-center cursor-pointer hover:underline"
                 >
                     {post.title}
                 </h4>
