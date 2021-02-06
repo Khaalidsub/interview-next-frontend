@@ -5,5 +5,5 @@ export const axios = Axios.create({
 });
 
 export const imageApi = Axios.create({
-  baseURL: "https://picsum.photos/v2list?page=1&limit=20",
+  baseURL: "https://picsum.photos/v2",
 });

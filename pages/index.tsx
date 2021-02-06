@@ -1,10 +1,7 @@
-import { AxiosResponse } from "axios"
+
 import { Post } from "../types"
-import { axios } from "../util"
+import { axios, imageApi } from "../util"
 import { GetStaticProps } from 'next'
-import { SimpleGrid, Box, Container, Flex, Spacer, Grid } from "@chakra-ui/react"
-import post from "./post/[id]"
-// import React from "react"
 import PostCard from "../components/PostCard"
 import Navigation from "../components/Navigation"
 export interface PostsProps {
@@ -42,11 +39,15 @@ export const Posts = ({ posts }: PostsProps) => {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
-  const response = await axios.get<Post[]>('/posts?_limit=20')
+  const { data } = await axios.get<Post[]>('/posts?_limit=20')
+  const imageResponse = await imageApi.get('/list?page=1&limit=20')
+  const posts = data.map((post, i) => {
 
 
+    return { ...post, image: imageResponse.data[i].download_url }
+  })
   return {
-    props: { posts: [...response.data] }
+    props: { posts }
   }
 }
 
