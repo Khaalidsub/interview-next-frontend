@@ -23,7 +23,7 @@ export default function PostCard({ post }: PostCardProps) {
                 </h4>
             </Link>
             <p
-                className="whitespace-normal text-base mt-2 overflow-ellipsis"
+                className="whitespace-normal text-base font-light mt-2 overflow-ellipsis"
             >
                 {post.body}
             </p>

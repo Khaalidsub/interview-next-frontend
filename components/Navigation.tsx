@@ -1,13 +1,13 @@
 
 
-export default function Navigation() {
+export default function Navigation({ children }) {
     return (
         <div className="my-12 flex justify-center">
-            <div className="object-center border border-black shadow-lg max-w-md flex-grow py-4 rounded-md"  >
-
-                <h4 className="text-center text-2xl font-bold" >Posts</h4>
+            <div className="object-center border border-black shadow-lg max-w-xl flex-grow py-4 rounded-md"  >
 
 
+
+                {children}
 
             </div>
         </div>
