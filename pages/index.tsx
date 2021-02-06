@@ -1,65 +1,55 @@
-import Head from 'next/head'
-import styles from '../styles/Home.module.css'
+import { AxiosResponse } from "axios"
+import { Post } from "../types"
+import { axios } from "../util"
+import { GetStaticProps } from 'next'
+import { SimpleGrid, Box, Container, Flex, Spacer, Grid } from "@chakra-ui/react"
+import post from "./post/[id]"
+// import React from "react"
+import PostCard from "../components/PostCard"
+import Navigation from "../components/Navigation"
+export interface PostsProps {
+  posts: Post[]
+}
+export const Posts = ({ posts }: PostsProps) => {
 
-export default function Home() {
+  const RenderPosts = () => {
+    return <> {posts?.map((post) => {
+      return (
+
+
+        <PostCard key={post.id} post={post} />
+
+
+      )
+    })
+    }
+
+    </>
+  }
+
   return (
-    <div className={styles.container}>
-      <Head>
-        <title>Create Next App</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
+    <>
 
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          Welcome to <a href="https://nextjs.org">Next.js!</a>
-        </h1>
+      <Navigation />
+      <Container mt="22" maxW="6xl"  >
 
-        <p className={styles.description}>
-          Get started by editing{' '}
-          <code className={styles.code}>pages/index.js</code>
-        </p>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
-            <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
-            </p>
-          </a>
-        </div>
-      </main>
-
-      <footer className={styles.footer}>
-        <a
-          href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Powered by{' '}
-          <img src="/vercel.svg" alt="Vercel Logo" className={styles.logo} />
-        </a>
-      </footer>
-    </div>
+        <SimpleGrid minChildWidth="340px" spacing="40px">
+          <RenderPosts />
+        </SimpleGrid>
+      </Container>
+    </>
   )
 }
+
+export const getStaticProps: GetStaticProps = async () => {
+  const response = await axios.get<Post[]>('/posts?_limit=20')
+
+
+  return {
+    props: { posts: [...response.data] }
+  }
+}
+
+
+export default Posts
+
